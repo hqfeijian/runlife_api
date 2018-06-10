@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.daohu.runlife.api.repository.OrderSkuMapper" >
+  <resultMap id="BaseResultMap" type="com.daohu.runlife.api.domain.entity.OrderSku" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="sku_id" property="skuId" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="slogan" property="slogan" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="INTEGER" />
+    <result column="origin_price" property="originPrice" jdbcType="INTEGER" />
+    <result column="sold_num" property="soldNum" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.daohu.runlife.api.domain.entity.OrderSku" extends="BaseResultMap" >
+    <result column="detail_content" property="detailContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, sku_id, title, slogan, price, origin_price, sold_num, create_time, update_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    detail_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from jd_order_sku
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from jd_order_sku
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.daohu.runlife.api.domain.entity.OrderSku" >
+    insert into jd_order_sku (id, sku_id, title, 
+      slogan, price, origin_price, 
+      sold_num, create_time, update_time, 
+      detail_content)
+    values (#{id,jdbcType=INTEGER}, #{skuId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{slogan,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, #{originPrice,jdbcType=INTEGER}, 
+      #{soldNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{detailContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.daohu.runlife.api.domain.entity.OrderSku" >
+    insert into jd_order_sku
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="skuId != null" >
+        sku_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="slogan != null" >
+        slogan,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="originPrice != null" >
+        origin_price,
+      </if>
+      <if test="soldNum != null" >
+        sold_num,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="detailContent != null" >
+        detail_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="skuId != null" >
+        #{skuId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="slogan != null" >
+        #{slogan,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="originPrice != null" >
+        #{originPrice,jdbcType=INTEGER},
+      </if>
+      <if test="soldNum != null" >
+        #{soldNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="detailContent != null" >
+        #{detailContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.daohu.runlife.api.domain.entity.OrderSku" >
+    update jd_order_sku
+    <set >
+      <if test="skuId != null" >
+        sku_id = #{skuId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="slogan != null" >
+        slogan = #{slogan,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="originPrice != null" >
+        origin_price = #{originPrice,jdbcType=INTEGER},
+      </if>
+      <if test="soldNum != null" >
+        sold_num = #{soldNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="detailContent != null" >
+        detail_content = #{detailContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.daohu.runlife.api.domain.entity.OrderSku" >
+    update jd_order_sku
+    set sku_id = #{skuId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      slogan = #{slogan,jdbcType=VARCHAR},
+      price = #{price,jdbcType=INTEGER},
+      origin_price = #{originPrice,jdbcType=INTEGER},
+      sold_num = #{soldNum,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      detail_content = #{detailContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.daohu.runlife.api.domain.entity.OrderSku" >
+    update jd_order_sku
+    set sku_id = #{skuId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      slogan = #{slogan,jdbcType=VARCHAR},
+      price = #{price,jdbcType=INTEGER},
+      origin_price = #{originPrice,jdbcType=INTEGER},
+      sold_num = #{soldNum,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

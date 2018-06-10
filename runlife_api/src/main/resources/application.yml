@@ -1,0 +1,32 @@
+server:
+  port: 9999
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://47.95.241.159:3306/runlife?characterEncoding=utf-8&allowMultiQueries=true
+      driver-class-name: com.mysql.jdbc.Driver
+      username: hqfeijian
+      password: 5497309qTDG,
+      defaultAutoCommit: true
+      initialSize: 10 # 连接池初始化大小
+      minIdle: 10 # 连接池最小大小
+      maxActive: 80  # 连接池最大大小
+      maxWait: 1200 # 配置获取连接等待超时的时间
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      validationQuery: 'SELECT 1'
+      timeBetweenEvictionRunsMillis: 60000 # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      minEvictableIdleTimeMillis: 300000 # 配置一个连接在池中最小生存的时间，单位是毫秒
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000 # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      useGlobalDataSourceStat: true # 合并多个DruidDataSource的监控数据
+logging:
+  level:
+    root: INFO
+    org.hibernate: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+    com.springms: DEBUG
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.daohu.runlife.api.domain.entity

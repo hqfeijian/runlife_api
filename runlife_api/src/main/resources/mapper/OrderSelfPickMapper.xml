@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.daohu.runlife.api.repository.OrderSelfPickMapper" >
+  <resultMap id="BaseResultMap" type="com.daohu.runlife.api.domain.entity.OrderSelfPick" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="waiter_id" property="waiterId" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="takecode" property="takecode" jdbcType="VARCHAR" />
+    <result column="pick_time" property="pickTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, waiter_id, order_id, takecode, pick_time, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from jd_order_selfpick
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from jd_order_selfpick
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.daohu.runlife.api.domain.entity.OrderSelfPick" >
+    insert into jd_order_selfpick (id, waiter_id, order_id, 
+      takecode, pick_time, status
+      )
+    values (#{id,jdbcType=INTEGER}, #{waiterId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, 
+      #{takecode,jdbcType=VARCHAR}, #{pickTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.daohu.runlife.api.domain.entity.OrderSelfPick" >
+    insert into jd_order_selfpick
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="waiterId != null" >
+        waiter_id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="takecode != null" >
+        takecode,
+      </if>
+      <if test="pickTime != null" >
+        pick_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="waiterId != null" >
+        #{waiterId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="takecode != null" >
+        #{takecode,jdbcType=VARCHAR},
+      </if>
+      <if test="pickTime != null" >
+        #{pickTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.daohu.runlife.api.domain.entity.OrderSelfPick" >
+    update jd_order_selfpick
+    <set >
+      <if test="waiterId != null" >
+        waiter_id = #{waiterId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="takecode != null" >
+        takecode = #{takecode,jdbcType=VARCHAR},
+      </if>
+      <if test="pickTime != null" >
+        pick_time = #{pickTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.daohu.runlife.api.domain.entity.OrderSelfPick" >
+    update jd_order_selfpick
+    set waiter_id = #{waiterId,jdbcType=INTEGER},
+      order_id = #{orderId,jdbcType=INTEGER},
+      takecode = #{takecode,jdbcType=VARCHAR},
+      pick_time = #{pickTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

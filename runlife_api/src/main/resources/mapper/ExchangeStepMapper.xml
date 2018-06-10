@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.daohu.runlife.api.repository.ExchangeStepMapper">
+  <resultMap id="BaseResultMap" type="com.daohu.runlife.api.domain.entity.ExchangeStep">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="exchange_step" jdbcType="INTEGER" property="exchangeStep" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="step_coin" jdbcType="DOUBLE" property="stepCoin" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, address, exchange_step, create_time, step_coin
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from rl_exchange_step
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectCurrentDateByAddress" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from rl_exchange_step
+    where address = #{address,jdbcType=VARCHAR} and create_time > date_format(now(),'%y-%m-%d')
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from rl_exchange_step
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.daohu.runlife.api.domain.entity.ExchangeStep">
+    insert into rl_exchange_step (id, address, exchange_step,
+      create_time, step_coin)
+    values (#{id,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{exchangeStep,jdbcType=INTEGER},
+      #{createTime,jdbcType=TIMESTAMP}, #{stepCoin,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.daohu.runlife.api.domain.entity.ExchangeStep">
+    insert into rl_exchange_step
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="exchangeStep != null">
+        exchange_step,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="stepCoin != null">
+        step_coin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeStep != null">
+        #{exchangeStep,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stepCoin != null">
+        #{stepCoin,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.daohu.runlife.api.domain.entity.ExchangeStep">
+    update rl_exchange_step
+    <set>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeStep != null">
+        exchange_step = #{exchangeStep,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stepCoin != null">
+        step_coin = #{stepCoin,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.daohu.runlife.api.domain.entity.ExchangeStep">
+    update rl_exchange_step
+    set address = #{address,jdbcType=VARCHAR},
+      exchange_step = #{exchangeStep,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      step_coin = #{stepCoin,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

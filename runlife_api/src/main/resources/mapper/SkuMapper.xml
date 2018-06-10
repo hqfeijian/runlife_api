@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.daohu.runlife.api.repository.SkuMapper" >
+  <resultMap id="BaseResultMap" type="com.daohu.runlife.api.domain.entity.Sku" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="shop_id" property="shopId" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="slogan" property="slogan" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="INTEGER" />
+    <result column="origin_price" property="originPrice" jdbcType="INTEGER" />
+    <result column="sold_num" property="soldNum" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="publish_waiter_id" property="publishWaiterId" jdbcType="INTEGER" />
+    <result column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="valid" property="valid" jdbcType="BIT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.daohu.runlife.api.domain.entity.Sku" extends="BaseResultMap" >
+    <result column="detail_content" property="detailContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, shop_id, title, slogan, price, origin_price, sold_num, create_time, update_time, 
+    status, publish_waiter_id, product_id, valid
+  </sql>
+  <sql id="Blob_Column_List" >
+    detail_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from jd_sku
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from jd_sku
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.daohu.runlife.api.domain.entity.Sku" >
+    insert into jd_sku (id, shop_id, title, 
+      slogan, price, origin_price, 
+      sold_num, create_time, update_time, 
+      status, publish_waiter_id, product_id, 
+      valid, detail_content)
+    values (#{id,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{slogan,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, #{originPrice,jdbcType=INTEGER}, 
+      #{soldNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{publishWaiterId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, 
+      #{valid,jdbcType=BIT}, #{detailContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.daohu.runlife.api.domain.entity.Sku" >
+    insert into jd_sku
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="slogan != null" >
+        slogan,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="originPrice != null" >
+        origin_price,
+      </if>
+      <if test="soldNum != null" >
+        sold_num,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="publishWaiterId != null" >
+        publish_waiter_id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="valid != null" >
+        valid,
+      </if>
+      <if test="detailContent != null" >
+        detail_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="slogan != null" >
+        #{slogan,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="originPrice != null" >
+        #{originPrice,jdbcType=INTEGER},
+      </if>
+      <if test="soldNum != null" >
+        #{soldNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="publishWaiterId != null" >
+        #{publishWaiterId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="valid != null" >
+        #{valid,jdbcType=BIT},
+      </if>
+      <if test="detailContent != null" >
+        #{detailContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.daohu.runlife.api.domain.entity.Sku" >
+    update jd_sku
+    <set >
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="slogan != null" >
+        slogan = #{slogan,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="originPrice != null" >
+        origin_price = #{originPrice,jdbcType=INTEGER},
+      </if>
+      <if test="soldNum != null" >
+        sold_num = #{soldNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="publishWaiterId != null" >
+        publish_waiter_id = #{publishWaiterId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="valid != null" >
+        valid = #{valid,jdbcType=BIT},
+      </if>
+      <if test="detailContent != null" >
+        detail_content = #{detailContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.daohu.runlife.api.domain.entity.Sku" >
+    update jd_sku
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      slogan = #{slogan,jdbcType=VARCHAR},
+      price = #{price,jdbcType=INTEGER},
+      origin_price = #{originPrice,jdbcType=INTEGER},
+      sold_num = #{soldNum,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      publish_waiter_id = #{publishWaiterId,jdbcType=INTEGER},
+      product_id = #{productId,jdbcType=INTEGER},
+      valid = #{valid,jdbcType=BIT},
+      detail_content = #{detailContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.daohu.runlife.api.domain.entity.Sku" >
+    update jd_sku
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      slogan = #{slogan,jdbcType=VARCHAR},
+      price = #{price,jdbcType=INTEGER},
+      origin_price = #{originPrice,jdbcType=INTEGER},
+      sold_num = #{soldNum,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      publish_waiter_id = #{publishWaiterId,jdbcType=INTEGER},
+      product_id = #{productId,jdbcType=INTEGER},
+      valid = #{valid,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

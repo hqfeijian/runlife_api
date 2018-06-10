@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.daohu.runlife.api.repository.BannerMapper" >
+  <resultMap id="BaseResultMap" type="com.daohu.runlife.api.domain.entity.Banner" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="href" property="href" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="deadline" property="deadline" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, title, status, create_time, deadline, image, href
+  </sql>
+  <select id="getByCond" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from jd_banner
+    where valid = 1
+    <if test="status!=null">
+      and status = #{status}
+    </if>
+    <if test="deadline!=null">
+      and deadline >= #{deadline}
+    </if>
+  </select>
+
+</mapper>
