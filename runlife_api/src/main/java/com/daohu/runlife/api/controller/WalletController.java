@@ -71,7 +71,7 @@ public class WalletController {
 
             // 部署的时候需要用到该账户的 gas，务必保证该账户余额充足
             Credentials credentials = WalletUtils.loadCredentials(
-                    "huqiangtest",
+                    "test",
                     "wallet/UTC--2018-05-17T07-21-02.590147500Z--321a5335c99a84b250c703a1c21582fc2d90c318");
             //查询余额
             EthGetBalance balance = web3j.ethGetBalance("0x321a5335c99A84B250c703a1C21582fc2D90C318", DefaultBlockParameterName.LATEST).send();
