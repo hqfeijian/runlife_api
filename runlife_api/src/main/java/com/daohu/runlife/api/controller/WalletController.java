@@ -71,7 +71,7 @@ public class WalletController {
 
             // 部署的时候需要用到该账户的 gas，务必保证该账户余额充足
             Credentials credentials = WalletUtils.loadCredentials(
-                    "test",
+                    "huqiangtest",
                     "wallet/UTC--2018-05-17T07-21-02.590147500Z--321a5335c99a84b250c703a1c21582fc2d90c318");
             //查询余额
             EthGetBalance balance = web3j.ethGetBalance("0x321a5335c99A84B250c703a1C21582fc2D90C318", DefaultBlockParameterName.LATEST).send();
@@ -178,8 +178,8 @@ public class WalletController {
                             contractAddress,
                             web3j,
                             credentials,
-                            BigInteger.valueOf(200000),
-                            BigInteger.valueOf(20000000));
+                            BigInteger.valueOf(1),
+                            BigInteger.valueOf(80000));
                     //验证智能合约是否可用
                     if(tokenERC_sol_tokenERC20.isValid()){
                         //调用智能合约
