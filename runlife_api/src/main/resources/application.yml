@@ -5,8 +5,8 @@ spring:
     druid:
       url: jdbc:mysql://47.95.241.159:3306/runlife?characterEncoding=utf-8&allowMultiQueries=true
       driver-class-name: com.mysql.jdbc.Driver
-      username: hqfeijian
-      password: 5497309qTDG,
+      username: ***
+      password: ***,
       defaultAutoCommit: true
       initialSize: 10 # 连接池初始化大小
       minIdle: 10 # 连接池最小大小
